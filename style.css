@@ -1,0 +1,37 @@
+/* mimic the native viewport full width/height + flex */
+a {
+  text-underline-offset: 2px;
+  text-decoration-thickness: 0.75px;
+  /* text-decoration: none; */
+  /* text-decoration-color: var(--color-21); */
+  /* text-decoration-style: dotted; */
+}
+
+body {
+  font-size: 1.2rem;
+  letter-spacing: 0.005rem;
+}
+
+body,
+div {
+  transition: background-color 0.5s ease;
+}
+hr {
+  transition: border-bottom-color 0.5s ease;
+}
+
+card,
+card * {
+  transition: 0.5s ease;
+}
+
+a:hover {
+  text-decoration-style: solid;
+  /*  background-color: var(--color-16);
+  border-radius: 6px; */
+  /* background-color: var(--color-16); */
+}
+
+::selection {
+  background-color: linear-gradient(180deg, #f9895b 0%, #adc7ad 100%);
+}
