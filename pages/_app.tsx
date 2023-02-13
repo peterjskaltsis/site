@@ -8,6 +8,7 @@ import { TamaguiProvider } from "@tamagui/core";
 import config from "../tamagui.config";
 import localFont from "@next/font/local";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 
 // Font files can be colocated inside of `pages`
 const generalSansFont = localFont({
@@ -50,6 +51,7 @@ export default function App({ Component, pageProps }: AppProps) {
           disableRootThemeClass
           defaultTheme={theme}
         >
+          <Analytics />
           <main className={generalSansFont.variable}>{contents}</main>
         </TamaguiProvider>
       </NextThemeProvider>
