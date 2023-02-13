@@ -7,9 +7,12 @@ import {
   useIsomorphicLayoutEffect,
   useTheme,
 } from "@tamagui/core";
+import useSWR from "swr";
 import { useThemeSetting } from "@tamagui/next-theme";
 import Link from "next/link";
 import { useState } from "react";
+import { fetcher } from "@/misc/fetcher";
+import { format, parseISO } from "date-fns";
 
 export default function Home() {
   const themeSetting = useThemeSetting()!;
@@ -21,6 +24,9 @@ export default function Home() {
     setClientTheme(themeSetting.current || "light");
   }, [themeSetting.current]);
 
+  const { data, error, isLoading } = useSWR("/api/commit", fetcher);
+  const date = data?.date ? parseISO(data?.date) : undefined;
+
   return (
     <>
       <Head>
@@ -28,7 +34,7 @@ export default function Home() {
         <meta name="theme-color" content={theme.background.val} />
         <meta
           name="description"
-          content="Designer and engineer, crafting early-state products. Based in Melbourne, Australia."
+          content="Creative Architect. Designer and engineer, crafting early-stage products. Based in Melbourne, Australia."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -37,13 +43,12 @@ export default function Home() {
         <meta property="og:title" content="Peter Skaltsis" />
         <meta
           property="og:description"
-          content="Designer and engineer, crafting early-state products. Based in Melbourne, Australia."
+          content="Creative Architect. Designer and engineer, crafting early-stage products. Based in Melbourne, Australia."
         />
         <meta property="og:type" content="website" />
-        {/* <meta property="og:url" content="" /> */}
         <meta
           property="og:image"
-          content="https://pbs.twimg.com/profile_images/1610955455232372736/JDb8eLPt_400x400.jpg"
+          content="https://site-peter-s1.vercel.app/JDb8eLPt_400x400.jpeg"
         />
 
         <meta name="twitter:site" content="@peterjskaltsis" />
@@ -52,14 +57,15 @@ export default function Home() {
         <meta name="twitter:creator" content="@individual_account" />
         <meta
           name="twitter:description"
-          content="Designer and engineer, crafting early-state products. Based in Melbourne, Australia."
+          content="Creative Architect. Designer and engineer, crafting early-stage products. Based in Melbourne, Australia."
         />
         <meta
           name="twitter:image"
-          content="https://pbs.twimg.com/profile_images/1610955455232372736/JDb8eLPt_400x400.jpg"
+          content="https://site-peter-s1.vercel.app/JDb8eLPt_400x400.jpeg"
         />
         <link rel="author" href="Peter Skaltsis" />
       </Head>
+
       <Stack
         padding="$6"
         paddingVertical="$14"
@@ -70,29 +76,44 @@ export default function Home() {
       >
         <Stack space="$6">
           <Text fontFamily="$body" color="$color">
-            Peter Skaltsis
-            <br />
-            Based in Melbourne, Australia.
+            Peter Skaltsis <br /> Based in Melbourne, Australia.
           </Text>
 
           <Unspaced>
-            <br />
+            <Spacer />
+            <Spacer />
           </Unspaced>
 
           <Text fontFamily="$body" color="$color">
             I’m a designer and engineer, currently crafting innovative consumer
-            products in the personal finance space at{" "}
-            <Link href={"#"}>Finder Ventures</Link>.
+            products in the personal finance space and shaping potential future
+            visions at{" "}
+            <Link target="_blank" href="https://www.finderventures.com/">
+              Finder Ventures
+            </Link>
+            .
           </Text>
+
           <Text fontFamily="$body" color="$color">
-            I joined <Link href={"#"}>Finder</Link> in 2020 as a Software
-            Engineer, after being discovered through{" "}
-            <Link href={"#"}>this side project</Link>. In 2021, I began working
-            as the Creative Architect in the Ventures team, where I led the
-            design and frontend build of the Wallet features of the{" "}
-            <Link href={"#"}>Finder App</Link> and contributed to shaping
-            potential future visions for the company.
+            I joined <Link href="https://twitter.com/findercomau">Finder</Link>{" "}
+            in 2020 (via{" "}
+            <Link
+              target="_blank"
+              href="https://twitter.com/peterjskaltsis/status/1290186815144525824?s=20"
+            >
+              a tweet
+            </Link>
+            ), where I led the design and build of Finder’s wallet in their{" "}
+            <Link
+              target="_blank"
+              href="https://apps.apple.com/au/app/finder-money-finance-manager/id1497239072"
+            >
+              app
+            </Link>
+            . Following this, I redesigned the app and led the build of a design
+            system now used across most of the company.
           </Text>
+
           <Text fontFamily="$body" color="$color">
             Previously, I spent over 5 years as a successful freelancer,
             developing my expertise in both design and engineering while
@@ -113,42 +134,20 @@ export default function Home() {
             >
               Email
             </Pill>
+            <Pill
+              clientTheme={clientTheme}
+              url="https://github.com/peterjskaltsis"
+            >
+              Github
+            </Pill>
+            {/* <Pill
+              clientTheme={clientTheme}
+              url="https://read.cv/peterjskaltsis"
+            >
+              Resume
+            </Pill> */}
           </Stack>
         </Stack>
-
-        {/* <Stack space="$4" flexDirection="row" alignItems="center"> */}
-        {/* <Text
-            fontSize="$4"
-            fontWeight={600}
-            fontFamily="$body"
-            color="$color11"
-          >
-            Last Updated: February 11, 2023
-          </Text> */}
-        {/* <Stack height={1} flex={1} backgroundColor="$borderColorHover" /> */}
-        {/* <hr
-            style={{
-              flex: 1,
-              backgroundPositionX: "left",
-              backgroundPositionY: "center",
-              backgroundRepeat: "repeat-x",
-              backgroundImage:
-                "url(https://imgs.so/assets/sep-26222755ca614bbb3dca9ef0d43d209c7cc5779259fb7b516d7a70cf812e085c.svg)",
-              display: "block",
-              border: "none",
-              height: 5,
-              margin: 0,
-              opacity: 0.15,
-            }}
-          /> */}
-        {/* </Stack> */}
-
-        {/* <Stack space="$3" flexDirection="row">
-          <Card />
-
-          <Card />
-          <Card />
-        </Stack> */}
 
         <Stack
           height={1}
@@ -182,14 +181,23 @@ export default function Home() {
             </Link>
             .
           </Text>
-          <Text
-            fontSize="$3"
-            fontFamily="$body"
-            color="$color12"
-            lineHeight={24}
-          >
-            Last updated February 11, 2023.
-          </Text>
+          {date ? (
+            <Text
+              fontSize="$3"
+              fontFamily="$body"
+              color="$color12"
+              lineHeight={24}
+            >
+              Last commit{" "}
+              <Link
+                target="_blank"
+                href={`https://github.com/peterjskaltsis/site/commit/${data?.hash}`}
+              >
+                {format(date, "LLLL d, yyyy")}
+              </Link>
+              .
+            </Text>
+          ) : null}
         </Stack>
       </Stack>
       <Stack
@@ -211,35 +219,10 @@ export default function Home() {
           {clientTheme === "system" && "Ⓢ"}
         </Text>
       </Stack>
+      <Spacer />
     </>
   );
 }
-
-const Card = () => (
-  <Stack
-    tag="card"
-    flex={1}
-    padding="$6"
-    borderRadius="$8"
-    backgroundColor="$color3"
-    borderWidth="$1"
-    borderColor="$color4"
-    alignItems="center"
-  >
-    <Stack
-      width="$4"
-      height="$4"
-      borderRadius="$6"
-      backgroundColor="$color3"
-      borderWidth="$1"
-      borderColor="$color4"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Text fontFamily="$body">F</Text>
-    </Stack>
-  </Stack>
-);
 
 const Pill = ({ clientTheme, children, url }: any) => (
   <Link href={url} target="_blank" style={{ textDecoration: "none" }}>
@@ -275,4 +258,30 @@ const Pill = ({ clientTheme, children, url }: any) => (
       </Text>
     </Stack>
   </Link>
+);
+
+const Card = () => (
+  <Stack
+    tag="card"
+    flex={1}
+    padding="$6"
+    borderRadius="$8"
+    backgroundColor="$color3"
+    borderWidth="$1"
+    borderColor="$color4"
+    alignItems="center"
+  >
+    <Stack
+      width="$4"
+      height="$4"
+      borderRadius="$6"
+      backgroundColor="$color3"
+      borderWidth="$1"
+      borderColor="$color4"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Text fontFamily="$body">F</Text>
+    </Stack>
+  </Stack>
 );
