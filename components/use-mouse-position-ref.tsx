@@ -3,7 +3,7 @@ import { type RefObject, useEffect, useRef } from 'react';
 export const useMousePositionRef = (
   containerRef?: RefObject<HTMLElement | SVGElement | null>,
 ) => {
-  const positionRef = useRef({ x: 0, y: 0 });
+  const positionRef = useRef({ x: -10000, y: -10000 });
 
   useEffect(() => {
     const updatePosition = (x: number, y: number) => {

@@ -6,8 +6,6 @@ import {
   useState,
 } from 'react';
 
-import { cn } from '@/lib/utils';
-
 interface ScrambleInProps {
   text: string;
   scrambleSpeed?: number;
@@ -18,6 +16,7 @@ interface ScrambleInProps {
   autoStart?: boolean;
   onStart?: () => void;
   onComplete?: () => void;
+  delay?: number;
 }
 
 export interface ScrambleInHandle {
@@ -37,6 +36,7 @@ const ScrambleIn = forwardRef<ScrambleInHandle, ScrambleInProps>(
       autoStart = true,
       onStart,
       onComplete,
+      delay = 0,
     },
     ref,
   ) => {
@@ -46,11 +46,13 @@ const ScrambleIn = forwardRef<ScrambleInHandle, ScrambleInProps>(
     const [scrambleOffset, setScrambleOffset] = useState(0);
 
     const startAnimation = useCallback(() => {
-      setIsAnimating(true);
-      setVisibleLetterCount(0);
-      setScrambleOffset(0);
       onStart?.();
-    }, [onStart]);
+      setTimeout(() => {
+        setIsAnimating(true);
+        setVisibleLetterCount(0);
+        setScrambleOffset(0);
+      }, delay);
+    }, [onStart, delay]);
 
     const reset = useCallback(() => {
       setIsAnimating(false);
@@ -65,10 +67,14 @@ const ScrambleIn = forwardRef<ScrambleInHandle, ScrambleInProps>(
     }));
 
     useEffect(() => {
+      let timeoutId: NodeJS.Timeout;
       if (autoStart) {
-        startAnimation();
+        timeoutId = setTimeout(startAnimation, delay);
       }
-    }, [autoStart, startAnimation]);
+      return () => {
+        if (timeoutId) clearTimeout(timeoutId);
+      };
+    }, [autoStart, startAnimation, delay]);
 
     useEffect(() => {
       let interval: NodeJS.Timeout;

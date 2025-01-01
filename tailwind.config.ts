@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Concrette TRIAL', 'serif'],
-        sporty: ['Vipnagorgialla', 'sans-serif'],
+        sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

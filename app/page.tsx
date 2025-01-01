@@ -1,5 +1,4 @@
 import { getLatestCommitData } from '@/app/actions';
-import { parseISO } from 'date-fns';
 import { Content } from './content';
 
 export default async function Home() {

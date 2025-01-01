@@ -30,10 +30,12 @@ export const TooltipText = ({
 }) => {
   return (
     <Tooltip delayDuration={0}>
-      <TooltipTrigger className={cn('tooltip-trigger', className)}>
-        {children}
-      </TooltipTrigger>
-      <TooltipContent sideOffset={4}>
+      <TooltipTrigger className={cn('', className)}>{children}</TooltipTrigger>
+      <TooltipContent
+        sideOffset={6}
+        side="bottom"
+        className="px-1 py-0.5 font-semibold bg-muted text-muted-foreground/75"
+      >
         <ScrambleIn text={content} />
       </TooltipContent>
     </Tooltip>
@@ -43,51 +45,55 @@ export const TooltipText = ({
 export const Content = ({ commit }: { commit: CommitData }) => {
   return (
     <TooltipProvider>
-      <main className="flex min-h-dvh p-6 justify-center items-center px-4">
-        <div className="max-w-lg md:-mt-24 space-y-8">
+      <main className="flex min-h-dvh md:py-6 py-12 justify-center md:items-center px-4">
+        <motion.div className="max-w-lg md:-mt-24 space-y-8">
           <div className="space-y-6 text-foreground/80">
-            <div className="font-body space-y-0.5">
+            <motion.div className="font-body mb-7">
               <FancyText
-                className="text-xl font-serif"
+                className="text-2xl font-serif text-foreground"
                 texts={['Peter Skal·tsis']}
               />
               {/* <p className="text-muted-foreground text-sm">
               Living in Melbourne, Australia.
             </p> */}
-            </div>
+            </motion.div>
 
             <div className="space-y-4" />
 
-            <p className="font-body">
+            <motion.p className="font-body">
               Co-Founder of{' '}
-              <FancyLink icon={GatherLogo} href="https://gatherwealth.com.au">
+              <FancyLink
+                external
+                icon={GatherLogo}
+                href="https://gatherwealth.com.au"
+              >
                 Gather
               </FancyLink>
               , a fintech startup rethinking how you and your money work
               together. Our goal is to design a smarter, more personal way to
               shape and grow wealth.
-            </p>
+            </motion.p>
 
-            <p>
+            <motion.p className="tabular-nums">
               Creative Architect at{' '}
-              <FancyLink icon={FinderLogo} href="https://x.com/findercomau">
+              <FancyLink
+                external
+                icon={FinderLogo}
+                href="https://linkedin.com/company/finder"
+              >
                 Finder
               </FancyLink>{' '}
-              over the last 4 years. Redesigned and built their app with{' '}
-              <TooltipText content="Personal Finance Management">
-                PFM
-              </TooltipText>
-              , crypto, and wallet features, overhauled key parts of the site
-              serving 1M+ monthly visitors, and contributed to their first major
-              brand refresh in over a decade.
-            </p>
+              for 4 years. Redesigned and built their app, overhauled key parts
+              of their site serving 1 million monthly visitors, and led design
+              for a major rebrand.
+            </motion.p>
 
-            <p>
-              Previously, ran a freelance practice for four years, crafting
-              sites for international clients and online communities.
-            </p>
+            <motion.p className="tabular-nums">
+              Prior to that, ran a freelance practice for 4 years, crafting
+              sites for international clients.
+            </motion.p>
 
-            <p>
+            <motion.p>
               Follow{' '}
               <a
                 target="_blank"
@@ -107,10 +113,22 @@ export const Content = ({ commit }: { commit: CommitData }) => {
                 peterjskaltsis@gmail.com
               </a>{' '}
               to chat.
-            </p>
+            </motion.p>
           </div>
 
-          <div className="h-px flex-1 border-b border-border border-dashed my-6" />
+          <motion.div
+            className="h-px flex-1 border-b border-border border-dashed my-6"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{
+              duration: 1,
+              delay: 0.5,
+              ease: 'easeOut',
+            }}
+            style={{
+              transformOrigin: 'left',
+            }}
+          />
 
           <Monoco
             className="flex gap-3 items-center text-muted-foreground/75"
@@ -120,29 +138,32 @@ export const Content = ({ commit }: { commit: CommitData }) => {
           >
             {commit?.date && (
               <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 }}
+                initial={{ opacity: 0, filter: 'blur(5px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{ delay: 0.1, duration: 0.6 }}
                 className="mr-auto text-sm"
               >
-                Updated{' '}
-                <a
-                  href={`https://github.com/peterjskaltsis/site/commit/${commit.hash}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ScrambleIn
-                    scrambleSpeed={50}
-                    text={format(commit.date, 'LLL d, yyyy')}
-                  />
-                </a>
+                <TooltipText content="View on Github">
+                  Updated{' '}
+                  <a
+                    href={`https://github.com/peterjskaltsis/site/commit/${commit.hash}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ScrambleIn
+                      delay={150}
+                      scrambleSpeed={50}
+                      text={format(commit.date, 'LLL d, yyyy')}
+                    />
+                  </a>
+                </TooltipText>
               </motion.p>
             )}
 
             <motion.a
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
+              initial={{ opacity: 0, filter: 'blur(5px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)' }}
+              transition={{ delay: 0.2, duration: 0.6 }}
               href="https://github.com/peterjskaltsis"
               rel="noopener noreferrer"
               target="_blank"
@@ -151,9 +172,9 @@ export const Content = ({ commit }: { commit: CommitData }) => {
             </motion.a>
 
             <motion.a
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
+              initial={{ opacity: 0, filter: 'blur(5px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)' }}
+              transition={{ delay: 0.3, duration: 0.6 }}
               href="https://www.linkedin.com/in/peterjskaltsis"
               target="_blank"
               rel="noopener noreferrer"
@@ -173,9 +194,9 @@ export const Content = ({ commit }: { commit: CommitData }) => {
             </motion.a> */}
 
             <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              initial={{ opacity: 0, filter: 'blur(5px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)' }}
+              transition={{ delay: 0.4, duration: 0.6 }}
               className="flex items-center justify-center"
             >
               <TooltipText content="Melbourne, Australia">
@@ -216,7 +237,7 @@ export const Content = ({ commit }: { commit: CommitData }) => {
               </TooltipText>
             </motion.span>
           </Monoco>
-        </div>
+        </motion.div>
       </main>
     </TooltipProvider>
   );

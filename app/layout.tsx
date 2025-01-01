@@ -1,15 +1,24 @@
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const interFont = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+const serifFont = localFont({
+  src: [
+    {
+      path: './fonts/ConcretteTRIALVF.woff2',
+    },
+    {
+      path: './fonts/ConcretteTRIALVF.woff',
+    },
+  ],
+  variable: '--font-serif',
 });
 
 export const metadata: Metadata = {
@@ -49,9 +58,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${interFont.variable} ${serifFont.variable} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
