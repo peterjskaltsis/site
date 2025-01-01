@@ -1,35 +1,40 @@
 {
   "name": "site",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
+  "author": {
+    "name": "Peter Skaltsis",
+    "url": "https://skalts.is"
+  },
   "scripts": {
-    "dev": "TAMAGUI_TARGET=web next dev",
-    "build": "TAMAGUI_TARGET=web next build",
-    "start": "TAMAGUI_TARGET=web next start",
-    "lint": "next lint"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write ."
   },
   "dependencies": {
-    "@next/font": "13.1.6",
-    "@tamagui/animations-css": "^1.2.18",
-    "@tamagui/config-base": "^1.2.18",
-    "@tamagui/core": "^1.2.18",
-    "@tamagui/next-theme": "^1.2.18",
-    "@types/node": "18.13.0",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.10",
-    "@vercel/analytics": "^0.1.8",
-    "date-fns": "^2.29.3",
-    "eslint": "8.34.0",
-    "eslint-config-next": "13.1.6",
-    "next": "^13.1.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-native-web": "^0.18.12",
-    "react-native-web-lite": "^1.2.18",
-    "swr": "^2.0.3",
-    "typescript": "4.9.5"
+    "@monokai/monoco-react": "^0.2.2",
+    "@radix-ui/react-tooltip": "^1.1.6",
+    "@vercel/analytics": "^1.4.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.469.0",
+    "motion": "^11.15.0",
+    "next": "15.1.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@tamagui/next-plugin": "^1.2.18"
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }

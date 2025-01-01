@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 0 0% 3.9%;
+      --foreground: 0 0% 98%;
+      --muted: 0 0% 14.9%;
+      --muted-foreground: 0 0% 63.9%;
+      --popover: 0 0% 3.9%;
+      --popover-foreground: 0 0% 98%;
+      --border: 0 0% 14.9%;
+      --input: 0 0% 14.9%;
+      --card: 0 0% 3.9%;
+      --card-foreground: 0 0% 98%;
+      --primary: 0 0% 98%;
+      --primary-foreground: 0 0% 9%;
+      --secondary: 0 0% 14.9%;
+      --secondary-foreground: 0 0% 98%;
+      --accent: 0 0% 14.9%;
+      --accent-foreground: 0 0% 98%;
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 0 0% 98%;
+      --ring: 0 0% 83.1%;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    /* font-family: "Concrette TRIAL", sans-serif; */
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  body {
+    -ms-overflow-style: none;
+  }
+
+  ::selection {
+    @apply text-blue-400 bg-blue-500/20 bg-blend-multiply;
+  }
+}
+
+@layer utilities {
+  .link {
+    @apply relative no-underline;
+
+    &:hover::after {
+      @apply opacity-20 -bottom-0.5;
+    }
+
+    &::after {
+      @apply pointer-events-none absolute -bottom-2 left-0 right-0 h-[1.5px] rounded-lg bg-current opacity-0 transition-all duration-200;
+      content: "";
+    }
+  }
+
+  .visible-link {
+    @apply relative inline-flex items-center font-medium;
+
+    &::after {
+      content: "";
+      @apply absolute bottom-0 left-0 right-0 h-[2px] rounded-sm bg-current opacity-10 transition-all duration-200;
+    }
+
+    &:hover::after {
+      @apply opacity-25;
+    }
+  }
+
+  .tooltip-trigger {
+    @apply relative;
+
+    &:hover::before {
+      content: "";
+      @apply absolute -z-10 opacity-75 bg-muted rounded-md;
+      inset-inline: -4px;
+      inset-block: -1px;
+    }
+  }
+}
