@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: 'Peter Skaltsis',
     images: [
       {
-        url: 'https://skalts.is/JDb8eLPt_400x400.jpeg',
+        url: 'https://peterskaltsis.com/JDb8eLPt_400x400.jpeg',
       },
     ],
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     creator: '@individual_account',
     description:
       'Co-Founder. Creative Architect. Designer and Engineer. Crafting early-stage products. Based in Melbourne, Australia.',
-    images: ['https://skalts.is/JDb8eLPt_400x400.jpeg'],
+    images: ['https://peterskaltsis.com/JDb8eLPt_400x400.jpeg'],
   },
   authors: [{ name: 'Peter Skaltsis' }],
 };
